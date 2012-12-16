@@ -1,90 +1,95 @@
-//queue implementation
+
+
 #include<iostream>
+#include<stdlib.h>
 using namespace std;
-
-int main()
+class queue
 {
+   int q[5],head,tail;
+   public:
+      queue()
+      {
+	 head=-1;
+	 tail=-1;
+      }
+      void enque(int x)
+      {
+	 if(head ==-1 && tail == -1)
+	 {
+	   q[++tail]=x;
+	   head=tail;
+	   return;
+	 }
+	 else if(head == (tail+1)%5 )
+	 {
+	    cout <<" Circular Queue over flow";
+	    return;
+	 }
+	 tail= (tail+1)%5;
+	 q[tail]=x;
+     }
 
-int ch,tail,head,del,el1;
-cout<<"enter the Queue size"<<endl;
-cin>>tail;
-tail=tail+1; //incrementing by 1 for enqueue operation
-int q[tail];
-for(int count=1;count<tail;count++)
-{
-    cout<<count<<" ";
-}
-cout<<endl;
-cout<<"Enter the starting index of queue"<<endl;
-cin>>head;
+     void deque()
+     {
+	if(head==-1 && tail==-1)
+	{
+	  cout <<"under flow";
+	  return;
+	}
+	else if( head== tail  )
+	{
+	  head=tail=-1;
+	  return;
+	}
+	head= (head+1)%5;
+     }
 
-cout<<"Enter the Queue elements"<<endl;
 
-    for(int y=head-1;y<tail-1;y++)
+
+
+ void display()
     {
-        cin>>q[y];
+      int i;
+      if( head <= tail)
+      {
+	for(i=head; i<=tail;i++)
+	cout << q[i]<<" ";
+      }
+      else
+      {
+	 for(i=head;i<=4;i++)
+	 {
+	   cout <<q[i] << " ";
+	 }
+	 for(i=0;i<=tail;i++)
+	 {
+	    cout << q[i]<< " ";
+	 }
+      }
     }
-if(head!=1)
+};
+
+main()
 {
-    for(int i1=0;i1<head-1;i1++)
-    {
-        q[i1]=0;
-    }
-}
-head=head-1;
+
+int ch;
+queue q1;
 while(true)
-    {cout<<"Enter yout choice"<<endl;
-    cout<<"1.Add Element(Enqueue)"<<endl;
-    cout<<"2.Delete (Dequeue)"<<endl;
-    cout<<"3. Display"<<endl;
-    cin>>ch;
-
-    switch(ch)
-    {
-        case 1:
-        if(head==tail+1)
-        cout<<"Queue is full"<<endl;
-        else
-        {
-        cout<<"enter the element"<<endl;
-        cin>>el1;
-        q[tail-1]=el1;
-        if(tail==sizeof(q)/sizeof(*q))
-        {
-            tail=1;
-        }
-        else
-        tail+=1;}
-        break;
-
-
-        case 2:
-        if(q[head]==q[tail])
-        {
-            cout<<"empty"<<endl;
-        }
-        else
-        {
-        del=q[head];
-        if(head==sizeof(q)/sizeof(*q))
-        {head=0;
-        }
-        else
-        {
-        head+=1;
-
-        }
-        cout<<"deleted "<<del<<endl;}
-        break;
-
-        case 3:
-        for(int i=0;i<sizeof(q)/sizeof(int);i++)
-        {
-            cout<<q[i]<<endl;;
-        }
-        break;
-    }}
-
-
+{
+cout<<"\n1.INSERT\n2.DELETE\n3.DISPLAY\n4.EXIT\nEnter ur choice";
+cin >> ch;
+switch(ch)
+{
+    case 1: cout<<"enter element";
+	cin >> ch;
+	q1.enque(ch);
+	break;
+    case 2: q1.deque();
+    break;
+    case 3: q1.display();
+    break;
+    case 4:
+    exit(0);
 }
-
+}
+}
