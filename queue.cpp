@@ -1,95 +1,68 @@
-
-
 #include<iostream>
-#include<stdlib.h>
+#include<new>
+#include<cassert>
+const int MAX=5;
 using namespace std;
-class queue
+
+class que
 {
-   int q[5],head,tail;
-   public:
-      queue()
-      {
-	 head=-1;
-	 tail=-1;
-      }
-      void enque(int x)
-      {
-	 if(head ==-1 && tail == -1)
-	 {
-	   q[++tail]=x;
-	   head=tail;
-	   return;
-	 }
-	 else if(head == (tail+1)%5 )
-	 {
-	    cout <<" Circular Queue over flow";
-	    return;
-	 }
-	 tail= (tail+1)%5;
-	 q[tail]=x;
-     }
+    private:
+    int head, tail;
+    int *q;
+    public:
+    que()
+    {q=new int [MAX];
+        head=0;
+        tail=0;
 
-     void deque()
-     {
-	if(head==-1 && tail==-1)
-	{
-	  cout <<"under flow";
-	  return;
-	}
-	else if( head== tail  )
-	{
-	  head=tail=-1;
-	  return;
-	}
-	head= (head+1)%5;
-     }
-
-
-
-
- void display()
-    {
-      int i;
-      if( head <= tail)
-      {
-	for(i=head; i<=tail;i++)
-	cout << q[i]<<" ";
-      }
-      else
-      {
-	 for(i=head;i<=4;i++)
-	 {
-	   cout <<q[i] << " ";
-	 }
-	 for(i=0;i<=tail;i++)
-	 {
-	    cout << q[i]<< " ";
-	 }
-      }
     }
+
+    int enqu(int elem)
+    { q[tail]=elem;
+        if(head==(tail+1))
+        {return -1;}
+        if(tail==MAX)
+        {tail=0;
+        }
+        else
+        {
+        tail=tail+1;
+        return 0;}
+        }
+    int dequ()
+    {if(head==tail)
+    {return 1;}
+
+     if(head==MAX)
+        {head=0;
+        }
+        else
+        {
+        head+=1;
+        }
+        return q[head++];
+    }
+    int *get_queue()
+    {
+        return q;
+    }
+
 };
 
-main()
+int main()
 {
 
-int ch;
-queue q1;
-while(true)
-{
-cout<<"\n1.INSERT\n2.DELETE\n3.DISPLAY\n4.EXIT\nEnter ur choice";
-cin >> ch;
-switch(ch)
-{
-    case 1: cout<<"enter element";
-	cin >> ch;
-	q1.enque(ch);
-	break;
-    case 2: q1.deque();
-    break;
-    case 3: q1.display();
-    break;
-    case 4:
-    exit(0);
+    que qu=que();
+    assert(qu.enqu(10)==0);
+assert(qu.get_queue()[0] == 10);
+assert(sizeof(qu.get_queue())/sizeof(int) == 1);
+assert(qu.enqu(11)==0);
+assert(qu.enqu(12)==0);
+assert(qu.enqu(13)==0);
+assert(qu.enqu(14)==0);
+assert(qu.enqu(15)==0);
+
+
+
 }
-}
-}
+
