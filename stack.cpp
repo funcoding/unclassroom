@@ -1,57 +1,73 @@
-//stack implementation
 #include<iostream>
+#include<cassert>
+#include<new>
+const int MAX=10;
 using namespace std;
+class stack{
 
-int add(int *s,int top)
-{ int n1;
+private:
 
-    cout<<"enter the element to be added"<<endl;
-    cin>>n1;
-    top=top+1;
+   int top;
+   int* s;
 
-    s[top]=n1;
-    cout<<"new array is"<<endl;
-     for(int q=0;q<=top;q++)
-    {
-        cout<<s[q]<<" ";
-    }
+public:
+
+stack(){   //max
+ //init the fields
+ top=0;
+
 }
 
-int del(int *s, int topd)
+int push(int elem)
 {
-    if(topd==-1)
-        cout<<"Underflow"<<endl;
+  //add to *s
+  if(top==MAX)
+  {
+      cout<<"overflow"<<endl;
+
+  }
+  else
+  {s[top]=elem;
+  top=top+1;}
+
+  // return a special return code if stack overflows
+
+}
+
+int pop()
+{
+  //pop from *s
+  if(top==-1)
+        {cout<<"Underflow"<<endl;
+        }
     else
     {
-        topd=topd-1;
-        cout<<"the popped element is "<<s[topd+1];
-    }
+        top=top-1;
+        cout<<"the popped element is "<<s[top+1];
 
+    }
+  // return a special return code if the stack underflows
 }
 
-int main()
-{ int ch,siz;
-cout<<"enter the array size"<<endl;
-cin>>siz;
-int s[siz];
-cout<<"Enter the array elements"<<endl;
-for(int h=0;h<siz;h++)
-{
-    cin>>s[h];
-}
-    cout<<"Enter yout choice"<<endl;
-    cout<<"1.Add Element(push)"<<endl;
-    cout<<"2.Delete (pop)"<<endl;
-    cin>>ch;
-    switch(ch)
-    {
-        case 1:
-        add(s,siz-1);
-        break;
-        case 2:
-        del(s,siz-1);
-        break;
+
+   int* get_stack(){
+
+    //accessor method to get the stack
+
+return s;
+
     }
+};
+
+int main(){
+stack *st=new stack();
+st.push(10);
+
+assert(st.get_stack()[0] == 10); //check right value and left value  //stack of 0 has 10
+assert(sizeof(st.get_stack())/sizeof(int) == 1);
 
 
+
+
+// And so on ...
 }
