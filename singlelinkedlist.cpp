@@ -27,7 +27,8 @@ class link {
   public:
      link() {
 	head = NULL;
-    } int append(int num) {
+    }
+    int append(int num) {
 	node *newnode = new node();
 	newnode->assign(num);
 	newnode->pointer(NULL);
