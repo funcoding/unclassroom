@@ -2,72 +2,58 @@
 #include<cassert>
 using namespace std;
 
-class node
-{
-    private:
+class node {
+  private:
     int data1;
     node *next1;
-    public:
-    node(){};
-    void assign(int data)
-    {
-        data1=data;
+  public:
+     node() {
+    };
+    int assign(int data) {
+	data1 = data;
+	return data1;
     }
-    void pointer(node  *next)
-    {
-        next1=next;
+    void pointer(node * next) {
+	next1 = next;
     }
-
-    int data()
-    {
-        return data1;
-    }
-    node* next()
-    {
-        return next1;
+    node *next() {
+	return next1;
     }
 };
 
-class link
-{
+class link {
     node *head;
 
-    public:
-    link()
-    {
-        head==NULL;
+  public:
+     link() {
+	head = NULL;
+    } int append(int num) {
+	node *newnode = new node();
+	newnode->assign(num);
+	newnode->pointer(NULL);
+
+	node *tmp = head;
+
+	if (tmp != NULL) {
+	    while (tmp->next() != NULL) {
+
+		tmp = tmp->next();
+	    }
+
+	    tmp->pointer(newnode);
+	} else {
+	    head = newnode;
+	}
     }
 
-    int append(int num)
-    {
-        node *newnode=new node();
-        newnode->assign(num);
-        newnode->pointer(NULL);
-
-        node *tmp=head;
-
-        if(tmp!=NULL)
-        {
-            while(tmp->next()!=NULL)
-           {
-
-           tmp=tmp->next();}
-
-        tmp->pointer(newnode);
-        }
-    else
-    {
-        head=newnode;
-    }
-    }
-
-    };
+};
 
 
 
 int main()
-{ link List;
+{
+    link List;
 
-assert(List.append(100));
+    assert(List.append(100));
 
 }
