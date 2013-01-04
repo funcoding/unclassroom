@@ -1,60 +1,104 @@
 #include<iostream>
 #include<cassert>
+#include<stdlib.h>
 using namespace std;
 
-class node {
-  private:
-    int data1;
-    node *next1;
-  public:
-     node() {
-    };
-    int assign(int data) {
-	data1 = data;
-	return data1;
-    }
-    void pointer(node * next) {
-	next1 = next;
-    }
-    node *next() {
-	return next1;
-    }
-};
-
-class link {
-    node *head;
-
-  public:
-     link() {
-	head = NULL;
-    }
-    int append(int num) {
-	node *newnode = new node();
-	newnode->assign(num);
-	newnode->pointer(NULL);
-
-	node *tmp = head;
-
-	if (tmp != NULL) {
-	    while (tmp->next() != NULL) {
-
-		tmp = tmp->next();
-	    }
-
-	    tmp->pointer(newnode);
-	} else {
-	    head = newnode;
-	}
-    }
+class node
+{
+public:
+  int data;
+  node *link;
 
 };
 
+class linkedlist
+{  node *head;
+public:
+linkedlist()
+{
+   head=NULL;
+}
+    int add(int data1)
+    { node *insertnode=new node;
+        insertnode->data=data1;
+        insertnode->link=NULL;
 
+        node *temp=head;
+
+        if(temp!=NULL)
+        {
+            while(temp->link!=NULL)
+            {
+                temp=temp->link;
+            }
+            temp->link=insertnode;
+
+        }
+        else{head=insertnode;}
+
+
+        return 1;
+
+    }
+    void disp()
+    { node *temp1=head;
+    cout<<endl;
+    if(temp1==NULL)
+    {cout<<"Empty"<<endl;
+    }
+    if(temp1->link==NULL)
+    {
+        cout<<temp1->data<<endl;
+
+    }
+    else{
+    do{cout<<temp1->data<<endl;
+    temp1=temp1->link;
+    }
+    while(temp1!=NULL);
+    }
+
+    }
+
+
+    int remove(int removedata)
+    {
+        if(head==NULL)
+        cout<<"empty"<<endl;
+        node *current=head;
+        if(current->data==removedata)
+        {
+        head=current->link;
+        delete current;
+        return -1;
+        }
+        while(current->link)
+        {
+            if(current->link->data==removedata)
+            {
+                node *temp2=current->link;
+                current->link=temp2->link;
+                delete temp2;
+                
+
+
+            }
+            current=current->link;
+        }
+        return -1;
+
+    }
+
+
+
+};
 
 int main()
 {
-    link List;
+    linkedlist list;
+    assert(list.add(10)==1);
+    assert(list.add(100)==1);
+    assert(list.add(200)==1);
+    assert(list.remove(10)==-1);
 
-    assert(List.append(100));
-
-}
+    }
