@@ -57,15 +57,18 @@ void insertHelper(node* Node, int value)
 
 }
 
-
-void predisp()
+void disp()
 {node*tmp=root;
 if(tmp==NULL)
-    cout<<"empty ";
+    cout<<"empty"<<endl;
 else
-    {
-
+    {   cout<<"preoder"<<endl;
         predisphelper(tmp);
+        cout<<endl<<"inorder"<<endl;
+        indisphelper(tmp);
+        cout<<endl<<"postorder"<<endl;
+        postdisphelper(tmp);
+
     }
 }
 
@@ -82,15 +85,6 @@ void predisphelper(node *tmp)
 }
 
 
-void postdisp()
-{node*tmp=root;
-if(tmp==NULL)
-    cout<<"empty ";
-else
-    {
-        postdisphelper(tmp);
-    }
-}
 
 void postdisphelper(node *tmp)
 {
@@ -107,15 +101,7 @@ void postdisphelper(node *tmp)
 cout<<tmp->data<<" ";
 }
 
-void indisp()
-{node*tmp=root;
-if(tmp==NULL)
-    cout<<"empty ";
-else
-    {
-        indisphelper(tmp);
-    }
-}
+
 
 void indisphelper(node *tmp)
 {
@@ -137,7 +123,7 @@ cout<<tmp->data<<" ";
 int main()
 {
     btree binarytree;
-    binarytree.predisp();
+    binarytree.disp();
     binarytree.insert(6);
     binarytree.insert(2);
     binarytree.insert(1);
@@ -147,10 +133,5 @@ int main()
     binarytree.insert(7);
     binarytree.insert(9);
     binarytree.insert(8);
-    cout<<endl<<"preorder"<<endl;
-    binarytree.predisp();
-    cout<<endl<<"postorder"<<endl;
-    binarytree.postdisp();
-    cout<<endl<<"inorder"<<endl;
-    binarytree.indisp();
+    binarytree.disp();
 }
